@@ -6,13 +6,14 @@ public class Employee {
 
     private String firstName;
     private String lastName;
+    private Integer passportNumber;
 
-
-
-    public Employee(String firstName, String lastName) {
+    public Employee(String firstName, String lastName, Integer passportNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.passportNumber = passportNumber;
     }
+
 
     public String getFirstName() {
         return firstName;
@@ -22,14 +23,10 @@ public class Employee {
         return lastName;
     }
 
-
-    @Override
-    public String toString() {
-        return "{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
+    public Integer getPassportNumber() {
+        return passportNumber;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -41,5 +38,14 @@ public class Employee {
     @Override
     public int hashCode() {
         return Objects.hash(firstName, lastName);
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", passportNumber=" + passportNumber +
+                '}';
     }
 }

@@ -7,6 +7,8 @@ import com.kiruha.maptask.selfexception.EmployeeNotFoundException;
 import com.kiruha.maptask.selfexception.EmployeeStorageIsFullException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeInterface {
     private final EmployeeService employeeService;
@@ -16,55 +18,37 @@ public class EmployeeServiceImpl implements EmployeeInterface {
     }
 
     @Override
-    public void addEmployee(Employee employee) {
+    public Employee addEmployee(Employee employee, Integer passportNumber) {
         if (employeeService.employee.size() == employeeService.maxCountEmployee) {
             throw new EmployeeStorageIsFullException();
-        } else if (employeeService.employee.contains(employee)){
-            throw new EmployeeAlreadyAddedException();
-        }else
-            employeeService.employee.add(employee);
-    }
-
-
-    @Override
-    public void removeToNumEmployee(Integer i) {
-        if (employeeService.employee.size() > i) {
-            Employee removeEmpl = employeeService.employee.get(i);
-            employeeService.employee.remove(removeEmpl);
-        } else {
-            throw new EmployeeNotFoundException();
         }
-    }
-
-    @Override
-    public Employee findToNumEmployee(Integer i) {
-        if (employeeService.employee.size() <= i) {
-            throw new EmployeeNotFoundException();
-        } else {
-            return employeeService.employee.get(i);
-        }
-    }
-    @Override
-    public String allEmployee() {
-        return employeeService.employee.toString();
-
-    }
-
-    @Override
-    public String findEmployee(Employee employee) {
-        if (employeeService.employee.contains(employee)){
-            return employeeService.employee.get(employeeService.employee.indexOf(employee)).toString();
-        }else
+        if (employeeService.employee.containsKey(passportNumber)) {
             throw new EmployeeAlreadyAddedException();
+        }
+        employeeService.employee.put(employee.getPassportNumber(), employee);
+        return employee;
+    }
+
+
+    @Override
+    public Collection<Employee> allEmployee() {
+        return employeeService.employee.values();
     }
 
     @Override
-    public String removeEmployee(Employee employee) {
-        if (employeeService.employee.contains(employee)){
-            return employeeService.employee.remove(employeeService.employee.indexOf(employee)).toString();
-        }else
+    public Employee findEmployee(Integer passportNumber) {
+        if (employeeService.employee.containsKey(passportNumber)) {
+            return employeeService.employee.get(passportNumber);
+        } else
             throw new EmployeeNotFoundException();
     }
 
+    @Override
+    public Employee removeEmployee(Integer passportNumber) {
+        if (employeeService.employee.containsKey(passportNumber)) {
+            return employeeService.employee.remove(passportNumber);
+        } else
+            throw new EmployeeNotFoundException();
+    }
 
 }

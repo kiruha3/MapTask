@@ -2,16 +2,14 @@ package com.kiruha.maptask.controller;
 
 import com.kiruha.maptask.Employee;
 
+import java.util.Collection;
+
 public interface EmployeeInterface {
-    void addEmployee(Employee employee);
+    Employee addEmployee(Employee employee, Integer passportNumber);
 
-    void removeToNumEmployee(Integer i);
+    Collection<Employee> allEmployee();
 
-    Employee findToNumEmployee(Integer i);
+    Employee findEmployee(Integer passportNumber);
 
-    String allEmployee();
-
-    String findEmployee(Employee employee);
-
-    String removeEmployee(Employee employee);
+    Employee removeEmployee(Integer passportNumber);
 }
