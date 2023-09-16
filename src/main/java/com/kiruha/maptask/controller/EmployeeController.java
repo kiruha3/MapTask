@@ -6,13 +6,14 @@ import com.kiruha.maptask.selfexception.EmployeeAlreadyAddedException;
 import com.kiruha.maptask.selfexception.EmployeeNotFoundException;
 import com.kiruha.maptask.selfexception.EmployeeStorageIsFullException;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
+import java.util.Optional;
+import java.util.stream.Stream;
 
-@RequestMapping("/employee")
+//@RequestMapping("/employee")
 @RestController
 public class EmployeeController {
     private final EmployeeServiceImpl employeeServiceImpl;
@@ -29,9 +30,11 @@ public class EmployeeController {
     @GetMapping(path = "/add")
     public Employee addEmployer(@RequestParam(value = "firstName", required = false) String firstName,
                                 @RequestParam("lastName") String lastName,
-                                @RequestParam("passnum") Integer passportNumber) {
+                                @RequestParam("passnum") Integer passportNumber,
+                                @RequestParam("salary") Double salary,
+                                @RequestParam("department") Integer department) {
         try {
-            Employee employee = new Employee(firstName, lastName, passportNumber);
+            Employee employee = new Employee(firstName, lastName, passportNumber, salary, department);
             System.out.println("Сотрудник успешно добавлен ");
             return employeeServiceImpl.addEmployee(employee, passportNumber);
         } catch (EmployeeStorageIsFullException e) {
@@ -63,7 +66,22 @@ public class EmployeeController {
         return null;
     }
 
-
+    @GetMapping(path = "departments/min-salary")
+    public Optional<Double> minSalaryFindInDepartment(@RequestParam("departmentId") Integer department) {
+        return employeeServiceImpl.minSalary(department);
+    }
+    @GetMapping(path = "departments/max-salary")
+    public Optional<Double> maxSalaryFindInDepartment(@RequestParam("departmentId") Integer department) {
+        return employeeServiceImpl.maxSalary(department);
+    }
+    @GetMapping(path = "departments/all")
+    public Stream<Employee> allDepartment(@RequestParam("departmentId") Integer department) {
+        return employeeServiceImpl.allDeparment(department);
+    }
+    @GetMapping(path = "departments/alll")
+    public Collection<Employee> allDivideDepartment() {
+        return employeeServiceImpl.allDivideDeparment();
+    }
     @GetMapping(path = "/all")
     public Collection<Employee> allEmployer() {
         return employeeServiceImpl.allEmployee();

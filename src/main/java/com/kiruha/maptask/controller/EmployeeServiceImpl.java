@@ -7,7 +7,11 @@ import com.kiruha.maptask.selfexception.EmployeeNotFoundException;
 import com.kiruha.maptask.selfexception.EmployeeStorageIsFullException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeInterface {
@@ -51,4 +55,36 @@ public class EmployeeServiceImpl implements EmployeeInterface {
             throw new EmployeeNotFoundException();
     }
 
+    @Override
+    public Optional<Double> minSalary(Integer department) {
+        final Optional<Double> minSalary = employeeService.employee.values().stream()
+                .filter(employee -> employee.getDepartment() == department)
+                .map(employee -> employee.getSalary())
+                .min(Double::compare);
+        return minSalary;
+    }
+
+    @Override
+    public Optional<Double> maxSalary(Integer department) {
+        final Optional<Double> maxSalary = employeeService.employee.values().stream()
+                .filter(employee -> employee.getDepartment() == department)
+                .map(employee -> employee.getSalary())
+                .max(Double::compare);
+        return maxSalary;
+    }
+
+    @Override
+    public Stream<Employee> allDeparment(Integer department) {
+        final Stream<Employee> employeeInDepartment = employeeService.employee.values().stream()
+                .filter(employee -> employee.getDepartment() == department);
+        return employeeInDepartment;
+
+    }
+
+
+    @Override
+    public Collection<Employee> allDivideDeparment() {
+        final Collection<Employee> employeeAll = new ArrayList<>(employeeService.employee.values());
+        return employeeAll;
+    }
 }
