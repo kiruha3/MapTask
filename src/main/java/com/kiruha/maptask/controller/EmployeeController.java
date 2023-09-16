@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
+import java.util.List;
+
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -83,8 +85,8 @@ public class EmployeeController {
         return employeeServiceImpl.allDivideDeparment();
     }
     @GetMapping(path = "/all")
-    public Collection<Employee> allEmployer() {
-        return employeeServiceImpl.allEmployee();
+    public List<Employee> allEmployer() {
+        return (List<Employee>) employeeServiceImpl.allEmployee();
     }
 
 }

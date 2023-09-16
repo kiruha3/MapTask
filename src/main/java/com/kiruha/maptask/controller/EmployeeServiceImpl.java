@@ -7,9 +7,7 @@ import com.kiruha.maptask.selfexception.EmployeeNotFoundException;
 import com.kiruha.maptask.selfexception.EmployeeStorageIsFullException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -83,8 +81,10 @@ public class EmployeeServiceImpl implements EmployeeInterface {
 
 
     @Override
-    public Collection<Employee> allDivideDeparment() {
-        final Collection<Employee> employeeAll = new ArrayList<>(employeeService.employee.values());
+    public List<Employee> allDivideDeparment() {
+        final List<Employee> employeeAll = employeeService.employee.values().stream()
+                .sorted(Comparator.comparingInt(Employee::getDepartment))
+                .collect(Collectors.toList());
         return employeeAll;
     }
 }

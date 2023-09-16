@@ -3,6 +3,7 @@ package com.kiruha.maptask.controller;
 import com.kiruha.maptask.Employee;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -22,5 +23,5 @@ public interface EmployeeInterface {
 
     Stream<Employee> allDeparment(Integer department);
 
-    Collection<Employee> allDivideDeparment();
+    List<Employee> allDivideDeparment();
 }
