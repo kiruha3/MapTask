@@ -54,21 +54,21 @@ public class EmployeeServiceImpl implements EmployeeInterface {
     }
 
     @Override
-    public Optional<Double> minSalary(Integer department) {
-        final Optional<Double> minSalary = employeeService.employee.values().stream()
-                .filter(employee -> employee.getDepartment() == department)
-                .map(employee -> employee.getSalary())
-                .min(Double::compare);
-        return minSalary;
+    public Employee minSalary(Integer department) {
+        return Collections.unmodifiableCollection(employeeService.employee.values()).stream()
+                .filter(employee -> Objects.equals(employee.getDepartment(), department))
+                .min(Comparator.comparingDouble(Employee::getSalary))
+                .orElseThrow(()-> new RuntimeException("exception"));
+
     }
 
     @Override
-    public Optional<Double> maxSalary(Integer department) {
-        final Optional<Double> maxSalary = employeeService.employee.values().stream()
-                .filter(employee -> employee.getDepartment() == department)
-                .map(employee -> employee.getSalary())
-                .max(Double::compare);
-        return maxSalary;
+    public Employee maxSalary(Integer department) {
+        return Collections.unmodifiableCollection(employeeService.employee.values()).stream()
+                .filter(employee -> Objects.equals(employee.getDepartment(), department))
+                .max(Comparator.comparingDouble(Employee::getSalary))
+                .orElseThrow(()-> new RuntimeException("exception"));
+
     }
 
     @Override
@@ -81,10 +81,10 @@ public class EmployeeServiceImpl implements EmployeeInterface {
 
 
     @Override
-    public List<Employee> allDivideDeparment() {
-        final List<Employee> employeeAll = employeeService.employee.values().stream()
-                .sorted(Comparator.comparingInt(Employee::getDepartment))
-                .collect(Collectors.toList());
-        return employeeAll;
+    public Map<Integer, List<Employee>> allDivideDeparment() {
+        return Collections.unmodifiableCollection(employeeService.employee.values())
+                .stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment));
+
     }
 }

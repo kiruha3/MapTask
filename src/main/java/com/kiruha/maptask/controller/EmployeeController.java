@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 import java.util.List;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -69,19 +70,19 @@ public class EmployeeController {
     }
 
     @GetMapping(path = "departments/min-salary")
-    public Optional<Double> minSalaryFindInDepartment(@RequestParam("departmentId") Integer department) {
+    public Employee minSalaryFindInDepartment(@RequestParam("departmentId") Integer department) {
         return employeeServiceImpl.minSalary(department);
     }
     @GetMapping(path = "departments/max-salary")
-    public Optional<Double> maxSalaryFindInDepartment(@RequestParam("departmentId") Integer department) {
+    public Employee maxSalaryFindInDepartment(@RequestParam("departmentId") Integer department) {
         return employeeServiceImpl.maxSalary(department);
     }
-    @GetMapping(path = "departments/all")
+    @GetMapping(path = "departments/all", params = {"departmentId"})
     public Stream<Employee> allDepartment(@RequestParam("departmentId") Integer department) {
         return employeeServiceImpl.allDeparment(department);
     }
-    @GetMapping(path = "departments/alll")
-    public Collection<Employee> allDivideDepartment() {
+    @GetMapping(path = "departments/all")
+    public Map<Integer, List<Employee>> allDivideDepartment() {
         return employeeServiceImpl.allDivideDeparment();
     }
     @GetMapping(path = "/all")

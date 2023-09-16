@@ -4,6 +4,7 @@ import com.kiruha.maptask.Employee;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -17,11 +18,11 @@ public interface EmployeeInterface {
     Employee removeEmployee(Integer passportNumber);
 
 
-    Optional<Double> minSalary(Integer departmentId);
+    Employee minSalary(Integer departmentId);
 
-    Optional<Double> maxSalary(Integer departmentId);
+    Employee maxSalary(Integer departmentId);
 
     Stream<Employee> allDeparment(Integer department);
 
-    List<Employee> allDivideDeparment();
+    Map<Integer, List<Employee>> allDivideDeparment();
 }
