@@ -78,7 +78,7 @@ public class EmployeeController {
         return employeeServiceImpl.maxSalary(department);
     }
     @GetMapping(path = "departments/all", params = {"departmentId"})
-    public Stream<Employee> allDepartment(@RequestParam("departmentId") Integer department) {
+    public Collection<Employee> allDepartment(@RequestParam("departmentId") Integer department) {
         return employeeServiceImpl.allDeparment(department);
     }
     @GetMapping(path = "departments/all")

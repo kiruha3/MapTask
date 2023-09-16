@@ -22,7 +22,7 @@ public interface EmployeeInterface {
 
     Employee maxSalary(Integer departmentId);
 
-    Stream<Employee> allDeparment(Integer department);
+    Collection<Employee> allDeparment(Integer department);
 
     Map<Integer, List<Employee>> allDivideDeparment();
 }

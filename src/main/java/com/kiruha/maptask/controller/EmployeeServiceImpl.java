@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeInterface {
@@ -72,10 +71,11 @@ public class EmployeeServiceImpl implements EmployeeInterface {
     }
 
     @Override
-    public Stream<Employee> allDeparment(Integer department) {
-        final Stream<Employee> employeeInDepartment = employeeService.employee.values().stream()
-                .filter(employee -> employee.getDepartment() == department);
-        return employeeInDepartment;
+    public Collection<Employee> allDeparment(Integer department) {
+        return Collections.unmodifiableCollection(employeeService.employee.values()).stream()
+                .filter(employee -> Objects.equals(employee.getDepartment(), department))
+                .collect(Collectors.toList());
+
 
     }
 
