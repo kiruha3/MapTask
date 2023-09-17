@@ -7,13 +7,16 @@ public class Employee {
     private String firstName;
     private String lastName;
     private Integer passportNumber;
+    private Double salary;
+    private Integer department;
 
-    public Employee(String firstName, String lastName, Integer passportNumber) {
+    public Employee(String firstName, String lastName, Integer passportNumber, Double salary, Integer department) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.passportNumber = passportNumber;
+        this.salary = salary;
+        this.department = department;
     }
-
 
     public String getFirstName() {
         return firstName;
@@ -26,6 +29,15 @@ public class Employee {
     public Integer getPassportNumber() {
         return passportNumber;
     }
+
+    public Double getSalary() {
+        return salary;
+    }
+
+    public Integer getDepartment() {
+        return department;
+    }
+
 
     @Override
     public boolean equals(Object o) {

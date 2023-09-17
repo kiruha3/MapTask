@@ -7,7 +7,8 @@ import com.kiruha.maptask.selfexception.EmployeeNotFoundException;
 import com.kiruha.maptask.selfexception.EmployeeStorageIsFullException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeInterface {
@@ -50,5 +51,7 @@ public class EmployeeServiceImpl implements EmployeeInterface {
         } else
             throw new EmployeeNotFoundException();
     }
+
+
 
 }

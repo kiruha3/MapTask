@@ -12,4 +12,6 @@ public interface EmployeeInterface {
     Employee findEmployee(Integer passportNumber);
 
     Employee removeEmployee(Integer passportNumber);
+
+
 }

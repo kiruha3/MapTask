@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
 
+
 @RequestMapping("/employee")
 @RestController
 public class EmployeeController {
@@ -29,9 +30,11 @@ public class EmployeeController {
     @GetMapping(path = "/add")
     public Employee addEmployer(@RequestParam(value = "firstName", required = false) String firstName,
                                 @RequestParam("lastName") String lastName,
-                                @RequestParam("passnum") Integer passportNumber) {
+                                @RequestParam("passnum") Integer passportNumber,
+                                @RequestParam("salary") Double salary,
+                                @RequestParam("department") Integer department) {
         try {
-            Employee employee = new Employee(firstName, lastName, passportNumber);
+            Employee employee = new Employee(firstName, lastName, passportNumber, salary, department);
             System.out.println("Сотрудник успешно добавлен ");
             return employeeServiceImpl.addEmployee(employee, passportNumber);
         } catch (EmployeeStorageIsFullException e) {
@@ -62,8 +65,6 @@ public class EmployeeController {
         }
         return null;
     }
-
-
     @GetMapping(path = "/all")
     public Collection<Employee> allEmployer() {
         return employeeServiceImpl.allEmployee();
