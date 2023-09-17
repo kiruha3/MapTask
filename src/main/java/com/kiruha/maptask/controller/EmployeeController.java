@@ -70,4 +70,10 @@ public class EmployeeController {
         return employeeServiceImpl.allEmployee();
     }
 
+    @GetMapping(path = "/check-first-simbol")
+    public Boolean checkFirstSimbol(@RequestParam(value = "firstName", required = false) String firstName,
+                                    @RequestParam("lastName") String lastName){
+        return employeeServiceImpl.isCheckFirstSimbol(firstName,lastName);
+    }
+
 }
