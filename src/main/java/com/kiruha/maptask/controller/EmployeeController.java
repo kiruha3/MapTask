@@ -6,17 +6,14 @@ import com.kiruha.maptask.selfexception.EmployeeAlreadyAddedException;
 import com.kiruha.maptask.selfexception.EmployeeNotFoundException;
 import com.kiruha.maptask.selfexception.EmployeeStorageIsFullException;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
-import java.util.List;
 
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Stream;
 
-//@RequestMapping("/employee")
+@RequestMapping("/employee")
 @RestController
 public class EmployeeController {
     private final EmployeeServiceImpl employeeServiceImpl;
@@ -68,26 +65,9 @@ public class EmployeeController {
         }
         return null;
     }
-
-    @GetMapping(path = "departments/min-salary")
-    public Employee minSalaryFindInDepartment(@RequestParam("departmentId") Integer department) {
-        return employeeServiceImpl.minSalary(department);
-    }
-    @GetMapping(path = "departments/max-salary")
-    public Employee maxSalaryFindInDepartment(@RequestParam("departmentId") Integer department) {
-        return employeeServiceImpl.maxSalary(department);
-    }
-    @GetMapping(path = "departments/all", params = {"departmentId"})
-    public Collection<Employee> allDepartment(@RequestParam("departmentId") Integer department) {
-        return employeeServiceImpl.allDeparment(department);
-    }
-    @GetMapping(path = "departments/all")
-    public Map<Integer, List<Employee>> allDivideDepartment() {
-        return employeeServiceImpl.allDivideDeparment();
-    }
     @GetMapping(path = "/all")
-    public List<Employee> allEmployer() {
-        return (List<Employee>) employeeServiceImpl.allEmployee();
+    public Collection<Employee> allEmployer() {
+        return employeeServiceImpl.allEmployee();
     }
 
 }

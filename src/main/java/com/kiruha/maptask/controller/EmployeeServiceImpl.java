@@ -52,39 +52,6 @@ public class EmployeeServiceImpl implements EmployeeInterface {
             throw new EmployeeNotFoundException();
     }
 
-    @Override
-    public Employee minSalary(Integer department) {
-        return Collections.unmodifiableCollection(employeeService.employee.values()).stream()
-                .filter(employee -> Objects.equals(employee.getDepartment(), department))
-                .min(Comparator.comparingDouble(Employee::getSalary))
-                .orElseThrow(()-> new RuntimeException("exception"));
-
-    }
-
-    @Override
-    public Employee maxSalary(Integer department) {
-        return Collections.unmodifiableCollection(employeeService.employee.values()).stream()
-                .filter(employee -> Objects.equals(employee.getDepartment(), department))
-                .max(Comparator.comparingDouble(Employee::getSalary))
-                .orElseThrow(()-> new RuntimeException("exception"));
-
-    }
-
-    @Override
-    public Collection<Employee> allDeparment(Integer department) {
-        return Collections.unmodifiableCollection(employeeService.employee.values()).stream()
-                .filter(employee -> Objects.equals(employee.getDepartment(), department))
-                .collect(Collectors.toList());
 
 
-    }
-
-
-    @Override
-    public Map<Integer, List<Employee>> allDivideDeparment() {
-        return Collections.unmodifiableCollection(employeeService.employee.values())
-                .stream()
-                .collect(Collectors.groupingBy(Employee::getDepartment));
-
-    }
 }
