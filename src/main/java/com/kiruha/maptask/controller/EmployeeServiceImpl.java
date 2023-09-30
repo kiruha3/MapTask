@@ -14,6 +14,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+import static org.apache.commons.lang3.StringUtils.containsNone;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeInterface {
     private final EmployeeService employeeService;
@@ -65,8 +67,8 @@ public class EmployeeServiceImpl implements EmployeeInterface {
                         && !employee.getLastName().startsWith(employee.getLastName(), 1)) {
                     throw new CheckSimbolEmployeeException();
                 }
-                if (StringUtils.containsNone(employee.getFirstName(), "!.,_ ")
-                        && StringUtils.containsNone(employee.getLastName(), "!.,_ ")) {
+                if (containsNone(employee.getFirstName(), "!.,_ ")
+                        && containsNone(employee.getLastName(), "!.,_ ")) {
                     throw new CheckSimbolEmployeeException();
                 } else {
                     return employee;
