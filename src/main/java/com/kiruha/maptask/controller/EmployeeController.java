@@ -36,7 +36,7 @@ public class EmployeeController {
                                 @RequestParam("department") Integer department) {
         try {
             Employee employee = new Employee(firstName, lastName, passportNumber, salary, department);
-            System.out.println("Сотрудник успешно добавлен ");
+            System.out.println("Попытка ");
             return employeeServiceImpl.addEmployee(employee, passportNumber);
         } catch (EmployeeStorageIsFullException e) {
             System.out.println("ArrayIsFull ");
