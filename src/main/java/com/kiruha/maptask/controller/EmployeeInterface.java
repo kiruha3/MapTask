@@ -14,6 +14,5 @@ public interface EmployeeInterface {
 
     Employee removeEmployee(Integer passportNumber);
 
-
     Employee isCheckFirstSimbol(String firstName, String lastName) throws CheckFirstSimbolEmployeeException;
 }

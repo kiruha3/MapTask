@@ -56,13 +56,13 @@ public class EmployeeServiceImpl implements EmployeeInterface {
     }
 
     @Override
-    public Employee isCheckFirstSimbol(String firstName, String lastName)  {
+    public Employee isCheckFirstSimbol(String firstName, String lastName) {
         List<Employee> employeeList = new ArrayList<Employee>(employeeService.employee.values());
         for (Employee employee : employeeList) {
             if (Objects.equals(employee.getFirstName(), firstName) && Objects.equals(employee.getLastName(), lastName)) {
-                if (!employee.getFirstName().startsWith(employee.getFirstName(), 1)&&!employee.getLastName().startsWith(employee.getLastName(), 1)) {
+                if (!employee.getFirstName().startsWith(employee.getFirstName(), 1) && !employee.getLastName().startsWith(employee.getLastName(), 1)) {
                     throw new CheckFirstSimbolEmployeeException();
-                }else
+                } else
                     return employee;
             }
         }

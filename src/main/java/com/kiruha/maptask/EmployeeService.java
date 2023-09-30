@@ -11,7 +11,7 @@ import java.util.Map;
 public class EmployeeService {
     public final Integer maxCountEmployee = 20;
     public Map<Integer,Employee> employee = new HashMap<>(Map.of(
-            6554,new Employee("Ольга", "Васнецова",6554,35000.00,1),
+            6554,new Employee("Ольга", "Васнецова", 6554, 35000.00, 1),
             6555, new Employee("Василий", "Синицин",6555,25000.00,1),
             6556,new Employee("Инга", "Третьякова",6556,15000.00,2),
             6557,new Employee("Виталя", "Носков",6557,54000.00,2),

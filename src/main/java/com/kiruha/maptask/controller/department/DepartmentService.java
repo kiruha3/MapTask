@@ -2,7 +2,6 @@ package com.kiruha.maptask.controller.department;
 
 import com.kiruha.maptask.Employee;
 import com.kiruha.maptask.EmployeeService;
-import com.kiruha.maptask.selfexception.EmployeeNotFoundException;
 import com.kiruha.maptask.selfexception.EmployeeNotFoundExceptionMessage;
 import org.springframework.stereotype.Service;
 

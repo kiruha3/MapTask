@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+
 @RequestMapping("/departments")
 @RestController
 public class DepartmentController {
@@ -20,16 +21,19 @@ public class DepartmentController {
 
     @GetMapping(path = "/min-salary")
     public Employee minSalaryFindInDepartment(@RequestParam("departmentId") Integer department) {
-        return departmentService. minSalary(department);
+        return departmentService.minSalary(department);
     }
+
     @GetMapping(path = "/max-salary")
     public Employee maxSalaryFindInDepartment(@RequestParam("departmentId") Integer department) {
         return departmentService.maxSalary(department);
     }
+
     @GetMapping(path = "/all", params = {"departmentId"})
     public Collection<Employee> allDepartment(@RequestParam("departmentId") Integer department) {
         return departmentService.allDeparment(department);
     }
+
     @GetMapping(path = "/all")
     public Map<Integer, List<Employee>> allDivideDepartment() {
         return departmentService.allDivideDeparment();
