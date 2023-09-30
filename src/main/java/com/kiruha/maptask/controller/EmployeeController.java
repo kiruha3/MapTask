@@ -38,8 +38,6 @@ public class EmployeeController {
             Employee employee = new Employee(firstName, lastName, passportNumber, salary, department);
             System.out.println("Сотрудник успешно добавлен ");
             return employeeServiceImpl.addEmployee(employee, passportNumber);
-        } catch (CheckSimbolEmployeeException e) {
-            System.out.println("CheckSimbolEmployeeException");
         } catch (EmployeeStorageIsFullException e) {
             System.out.println("ArrayIsFull ");
         } catch (EmployeeAlreadyAddedException e) {
@@ -65,8 +63,6 @@ public class EmployeeController {
             return employeeServiceImpl.removeEmployee(passportNumber);
         } catch (EmployeeNotFoundException e) {
             System.out.println("EmployeeNotFound");
-        }catch (CheckSimbolEmployeeException e) {
-            System.out.println("CheckSimbolEmployeeException");
         }
 
         return null;
