@@ -6,7 +6,6 @@ import com.kiruha.maptask.selfexception.CheckSimbolEmployeeException;
 import com.kiruha.maptask.selfexception.EmployeeAlreadyAddedException;
 import com.kiruha.maptask.selfexception.EmployeeNotFoundException;
 import com.kiruha.maptask.selfexception.EmployeeStorageIsFullException;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static org.apache.commons.lang3.StringUtils.containsNone;
+import static org.apache.commons.lang3.StringUtils.isAlpha;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeInterface {
@@ -26,11 +26,15 @@ public class EmployeeServiceImpl implements EmployeeInterface {
 
     @Override
     public Employee addEmployee(Employee employee, Integer passportNumber) {
+
         if (employeeService.employee.size() == employeeService.maxCountEmployee) {
             throw new EmployeeStorageIsFullException();
         }
         if (employeeService.employee.containsKey(passportNumber)) {
             throw new EmployeeAlreadyAddedException();
+        }
+        if (!validateImput(employee.getFirstName(), employee.getLastName())) {
+            throw new CheckSimbolEmployeeException();
         }
         employeeService.employee.put(employee.getPassportNumber(), employee);
         return employee;
@@ -78,5 +82,7 @@ public class EmployeeServiceImpl implements EmployeeInterface {
         return null;
     }
 
-
+    private boolean validateImput(String firstName, String lastName) {
+        return isAlpha(firstName) && isAlpha(lastName);
+    }
 }

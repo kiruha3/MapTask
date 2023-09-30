@@ -1,6 +1,11 @@
 package com.kiruha.maptask;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Locale;
 import java.util.Objects;
+
+import static org.springframework.util.StringUtils.capitalize;
 
 public class Employee {
 
@@ -11,8 +16,8 @@ public class Employee {
     private Integer department;
 
     public Employee(String firstName, String lastName, Integer passportNumber, Double salary, Integer department) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName = capitalize(firstName.toLowerCase());
+        this.lastName = capitalize(lastName.toLowerCase());
         this.passportNumber = passportNumber;
         this.salary = salary;
         this.department = department;
