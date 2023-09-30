@@ -71,9 +71,14 @@ public class EmployeeController {
     }
 
     @GetMapping(path = "/check-first-simbol")
-    public Boolean checkFirstSimbol(@RequestParam(value = "firstName", required = false) String firstName,
+    public Employee checkFirstSimbol(@RequestParam(value = "firstName", required = false) String firstName,
                                     @RequestParam("lastName") String lastName){
-        return employeeServiceImpl.isCheckFirstSimbol(firstName,lastName);
+        try {
+            return employeeServiceImpl.isCheckFirstSimbol(firstName,lastName);
+        }catch (RuntimeException e){
+            System.out.println("Exception");
+        }
+        return null;
     }
 
 }

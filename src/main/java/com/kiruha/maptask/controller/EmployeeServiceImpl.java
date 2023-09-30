@@ -5,11 +5,12 @@ import com.kiruha.maptask.EmployeeService;
 import com.kiruha.maptask.selfexception.EmployeeAlreadyAddedException;
 import com.kiruha.maptask.selfexception.EmployeeNotFoundException;
 import com.kiruha.maptask.selfexception.EmployeeStorageIsFullException;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeInterface {
@@ -54,14 +55,17 @@ public class EmployeeServiceImpl implements EmployeeInterface {
     }
 
     @Override
-    public Boolean isCheckFirstSimbol(String firstName, String lastName) {
-       List<Employee> employeeList = new ArrayList<Employee>(employeeService.employee.values());
+    public Employee isCheckFirstSimbol(String firstName, String lastName) {
+        List<Employee> employeeList = new ArrayList<Employee>(employeeService.employee.values());
+        //http://localhost:8080/employee/check-first-simbol?firstName=виталя&lastName=Носков
         for (Employee employee : employeeList) {
-            if (employee.getFirstName().startsWith(employee.getFirstName())){
-                System.out.println(employee.getFirstName().startsWith(employee.getFirstName()));
-            };
+            if (Objects.equals(employee.getFirstName(), firstName) && Objects.equals(employee.getLastName(), lastName)) {
+                if (!employee.getFirstName().startsWith(employee.getFirstName(), 1)&&!employee.getLastName().startsWith(employee.getLastName(), 1)) {
+                    throw new RuntimeException();
+                }else
+                    return employee;
+            }
         }
-
         return null;
     }
 
