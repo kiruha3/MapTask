@@ -1,7 +1,7 @@
 package com.kiruha.maptask.controller;
 
 import com.kiruha.maptask.Employee;
-import com.kiruha.maptask.selfexception.CheckFirstSimbolEmployeeException;
+import com.kiruha.maptask.selfexception.CheckSimbolEmployeeException;
 
 import java.util.Collection;
 
@@ -14,5 +14,5 @@ public interface EmployeeInterface {
 
     Employee removeEmployee(Integer passportNumber);
 
-    Employee isCheckFirstSimbol(String firstName, String lastName) throws CheckFirstSimbolEmployeeException;
+    Employee isCheckFirstSimbol(String firstName, String lastName) throws CheckSimbolEmployeeException;
 }

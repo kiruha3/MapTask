@@ -2,7 +2,7 @@ package com.kiruha.maptask.controller;
 
 
 import com.kiruha.maptask.Employee;
-import com.kiruha.maptask.selfexception.CheckFirstSimbolEmployeeException;
+import com.kiruha.maptask.selfexception.CheckSimbolEmployeeException;
 import com.kiruha.maptask.selfexception.EmployeeAlreadyAddedException;
 import com.kiruha.maptask.selfexception.EmployeeNotFoundException;
 import com.kiruha.maptask.selfexception.EmployeeStorageIsFullException;
@@ -81,7 +81,7 @@ public class EmployeeController {
                                      @RequestParam("lastName") String lastName) {
         try {
             return employeeServiceImpl.isCheckFirstSimbol(firstName, lastName);
-        } catch (CheckFirstSimbolEmployeeException e) {
+        } catch (CheckSimbolEmployeeException e) {
             System.out.println("Exception");
         }
         return null;
