@@ -2,13 +2,16 @@ package com.kiruha.maptask.controller;
 
 import com.kiruha.maptask.Employee;
 import com.kiruha.maptask.EmployeeService;
+import com.kiruha.maptask.selfexception.CheckFirstSimbolEmployeeException;
 import com.kiruha.maptask.selfexception.EmployeeAlreadyAddedException;
 import com.kiruha.maptask.selfexception.EmployeeNotFoundException;
 import com.kiruha.maptask.selfexception.EmployeeStorageIsFullException;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeInterface {
@@ -52,6 +55,19 @@ public class EmployeeServiceImpl implements EmployeeInterface {
             throw new EmployeeNotFoundException();
     }
 
+    @Override
+    public Employee isCheckFirstSimbol(String firstName, String lastName)  {
+        List<Employee> employeeList = new ArrayList<Employee>(employeeService.employee.values());
+        for (Employee employee : employeeList) {
+            if (Objects.equals(employee.getFirstName(), firstName) && Objects.equals(employee.getLastName(), lastName)) {
+                if (!employee.getFirstName().startsWith(employee.getFirstName(), 1)&&!employee.getLastName().startsWith(employee.getLastName(), 1)) {
+                    throw new CheckFirstSimbolEmployeeException();
+                }else
+                    return employee;
+            }
+        }
+        return null;
+    }
 
 
 }
