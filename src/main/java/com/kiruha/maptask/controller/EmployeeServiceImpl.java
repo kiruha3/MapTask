@@ -2,6 +2,7 @@ package com.kiruha.maptask.controller;
 
 import com.kiruha.maptask.Employee;
 import com.kiruha.maptask.EmployeeService;
+import com.kiruha.maptask.selfexception.CheckFirstSimbolEmployeeException;
 import com.kiruha.maptask.selfexception.EmployeeAlreadyAddedException;
 import com.kiruha.maptask.selfexception.EmployeeNotFoundException;
 import com.kiruha.maptask.selfexception.EmployeeStorageIsFullException;
@@ -55,13 +56,12 @@ public class EmployeeServiceImpl implements EmployeeInterface {
     }
 
     @Override
-    public Employee isCheckFirstSimbol(String firstName, String lastName) {
+    public Employee isCheckFirstSimbol(String firstName, String lastName)  {
         List<Employee> employeeList = new ArrayList<Employee>(employeeService.employee.values());
-        //http://localhost:8080/employee/check-first-simbol?firstName=виталя&lastName=Носков
         for (Employee employee : employeeList) {
             if (Objects.equals(employee.getFirstName(), firstName) && Objects.equals(employee.getLastName(), lastName)) {
                 if (!employee.getFirstName().startsWith(employee.getFirstName(), 1)&&!employee.getLastName().startsWith(employee.getLastName(), 1)) {
-                    throw new RuntimeException();
+                    throw new CheckFirstSimbolEmployeeException();
                 }else
                     return employee;
             }
