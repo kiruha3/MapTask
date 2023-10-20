@@ -73,19 +73,4 @@ public class EmployeeController {
         return employeeServiceImpl.allEmployee();
     }
 
-//    @GetMapping(path = "/check-first-simbol")
-//    //тестовые
-//    //добавление
-//    //http://localhost:8080/employee/add?firstName=третьяков&lastName=кирилл&passnum=9543&salary=2004&department=1
-//    //http://localhost:8080/employee/check-first-simbol?firstName=третьяков&lastName=третьяков
-//    public Employee checkFirstSimbol(@RequestParam(value = "firstName", required = false) String firstName,
-//                                     @RequestParam("lastName") String lastName) {
-//        try {
-//            return employeeServiceImpl.isCheckFirstSimbol(firstName, lastName);
-//        } catch (CheckSimbolEmployeeException e) {
-//            System.out.println("Exception");
-//        }
-//        return null;
-//    }
-
 }
