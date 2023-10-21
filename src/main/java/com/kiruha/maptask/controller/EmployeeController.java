@@ -2,7 +2,6 @@ package com.kiruha.maptask.controller;
 
 
 import com.kiruha.maptask.Employee;
-import com.kiruha.maptask.selfexception.CheckSimbolEmployeeException;
 import com.kiruha.maptask.selfexception.EmployeeAlreadyAddedException;
 import com.kiruha.maptask.selfexception.EmployeeNotFoundException;
 import com.kiruha.maptask.selfexception.EmployeeStorageIsFullException;
@@ -17,10 +16,10 @@ import java.util.Collection;
 @RequestMapping("/employee")
 @RestController
 public class EmployeeController {
-    private final EmployeeServiceImpl employeeServiceImpl;
+    private final EmployeeService employeeService;
 
-    public EmployeeController(EmployeeServiceImpl employeeServiceimpl) {
-        this.employeeServiceImpl = employeeServiceimpl;
+    public EmployeeController(EmployeeService employeeServiceimpl) {
+        this.employeeService = employeeServiceimpl;
     }
 
     @GetMapping()
@@ -37,7 +36,7 @@ public class EmployeeController {
         try {
             Employee employee = new Employee(firstName, lastName, passportNumber, salary, department);
             System.out.println("Попытка ");
-            return employeeServiceImpl.addEmployee(employee, passportNumber);
+            return employeeService.addEmployee(employee, passportNumber);
         } catch (EmployeeStorageIsFullException e) {
             System.out.println("ArrayIsFull ");
         } catch (EmployeeAlreadyAddedException e) {
@@ -50,7 +49,7 @@ public class EmployeeController {
     @GetMapping(path = "/find")
     public Employee findEmployer(@RequestParam("passnum") Integer passportNumber) {
         try {
-            return employeeServiceImpl.findEmployee(passportNumber);
+            return employeeService.findEmployee(passportNumber);
         } catch (EmployeeNotFoundException e) {
             System.out.println("EmployeeNotFound");
         }
@@ -60,7 +59,7 @@ public class EmployeeController {
     @GetMapping(path = "/remove")
     public Employee removeEmployer(@RequestParam("passnum") Integer passportNumber) {
         try {
-            return employeeServiceImpl.removeEmployee(passportNumber);
+            return employeeService.removeEmployee(passportNumber);
         } catch (EmployeeNotFoundException e) {
             System.out.println("EmployeeNotFound");
         }
@@ -70,7 +69,7 @@ public class EmployeeController {
 
     @GetMapping(path = "/all")
     public Collection<Employee> allEmployer() {
-        return employeeServiceImpl.allEmployee();
+        return employeeService.allEmployee();
     }
 
 //    @GetMapping(path = "/check-first-simbol")

@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -28,9 +27,14 @@ public class DepartmentController {
     public Employee maxSalaryFindInDepartment(@RequestParam("departmentId") Integer department) {
         return departmentService.maxSalary(department);
     }
+    @GetMapping(path = "/summDepartmentSalary")
+    public double summDepartmentSalary(@RequestParam("departmentId") Integer department) {
+        return departmentService.sumDepartmentSalary(department);
+    }
+
 
     @GetMapping(path = "/all", params = {"departmentId"})
-    public Collection<Employee> allDepartment(@RequestParam("departmentId") Integer department) {
+    public Map<Integer, List<Employee>> allDepartment(@RequestParam("departmentId") Integer department) {
         return departmentService.allDeparment(department);
     }
 
