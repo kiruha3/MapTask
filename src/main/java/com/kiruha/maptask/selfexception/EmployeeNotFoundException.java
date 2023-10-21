@@ -1,4 +1,10 @@
 package com.kiruha.maptask.selfexception;
 
-public class EmployeeNotFoundException extends RuntimeException{
+import org.springframework.http.HttpStatus;
+import org.springframework.web.client.HttpStatusCodeException;
+
+public class EmployeeNotFoundException extends HttpStatusCodeException {
+    public EmployeeNotFoundException(String message) {
+        super(HttpStatus.BAD_REQUEST, message);
+    }
 }

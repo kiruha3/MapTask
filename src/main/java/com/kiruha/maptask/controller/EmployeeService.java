@@ -1,79 +1,77 @@
 package com.kiruha.maptask.controller;
 
 import com.kiruha.maptask.Employee;
-import com.kiruha.maptask.EmployeeService;
 import com.kiruha.maptask.selfexception.CheckSimbolEmployeeException;
 import com.kiruha.maptask.selfexception.EmployeeAlreadyAddedException;
 import com.kiruha.maptask.selfexception.EmployeeNotFoundException;
 import com.kiruha.maptask.selfexception.EmployeeStorageIsFullException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static org.apache.commons.lang3.StringUtils.containsNone;
 import static org.apache.commons.lang3.StringUtils.isAlpha;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeInterface {
-    private final EmployeeService employeeService;
-
-    public EmployeeServiceImpl(EmployeeService employeeService) {
-        this.employeeService = employeeService;
-    }
+public class EmployeeService implements EmployeeInterface {
+    public final Integer maxCountEmployee = 2;
+    public Map<Integer,Employee> employees = new HashMap<>(Map.of( ));
+//    private final EmployeeService employeeService;
+//
+//    public EmployeeServiceImpl(EmployeeService employeeService) {
+//        this.employeeService = employeeService;
+//    }
 
     @Override
     public Employee addEmployee(Employee employee, Integer passportNumber) {
 
-        if (employeeService.employee.size() == employeeService.maxCountEmployee) {
-            throw new EmployeeStorageIsFullException();
+        if (employees.size() == maxCountEmployee) {
+            throw new EmployeeStorageIsFullException("Массив сотрудников переполнен");
         }
-        if (employeeService.employee.containsKey(passportNumber)) {
-            throw new EmployeeAlreadyAddedException();
+        if (employees.containsKey(passportNumber)) {
+            throw new EmployeeAlreadyAddedException("Такой сотрудник уже есть");
         }
         if (!validateImput(employee.getFirstName(), employee.getLastName())) {
-            throw new CheckSimbolEmployeeException();
+            throw new CheckSimbolEmployeeException("Eror");
         }
-        employeeService.employee.put(employee.getPassportNumber(), employee);
+        employees.put(employee.getPassportNumber(), employee);
         return employee;
     }
 
 
     @Override
-    public Collection<Employee> allEmployee() {
-        return employeeService.employee.values();
+    public List<Employee> allEmployee() {
+        return new ArrayList<>(employees.values());
     }
 
     @Override
     public Employee findEmployee(Integer passportNumber) {
-        if (employeeService.employee.containsKey(passportNumber)) {
-            return employeeService.employee.get(passportNumber);
+        if (employees.containsKey(passportNumber)) {
+            return employees.get(passportNumber);
         } else
-            throw new EmployeeNotFoundException();
+            throw new EmployeeNotFoundException("Eror");
     }
 
     @Override
     public Employee removeEmployee(Integer passportNumber) {
-        if (employeeService.employee.containsKey(passportNumber)) {
-            return employeeService.employee.remove(passportNumber);
+        if (employees.containsKey(passportNumber)) {
+            return employees.remove(passportNumber);
         } else
-            throw new EmployeeNotFoundException();
+            throw new EmployeeNotFoundException("Eror");
     }
 
     @Override
     public Employee isCheckFirstSimbol(String firstName, String lastName) {
-        List<Employee> employeeList = new ArrayList<Employee>(employeeService.employee.values());
+        List<Employee> employeeList = new ArrayList<Employee>(employees.values());
         for (Employee employee : employeeList) {
             if (Objects.equals(employee.getFirstName(), firstName) && Objects.equals(employee.getLastName(), lastName)) {
                 if (!employee.getFirstName().startsWith(employee.getFirstName(), 1)
                         && !employee.getLastName().startsWith(employee.getLastName(), 1)) {
-                    throw new CheckSimbolEmployeeException();
+                    throw new CheckSimbolEmployeeException("Eror");
                 }
                 if (containsNone(employee.getFirstName(), "!.,_ ")
                         && containsNone(employee.getLastName(), "!.,_ ")) {
-                    throw new CheckSimbolEmployeeException();
+                    throw new CheckSimbolEmployeeException("Eror");
                 } else {
                     return employee;
                 }
