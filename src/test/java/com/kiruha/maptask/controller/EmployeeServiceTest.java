@@ -19,7 +19,7 @@ class EmployeeServiceTest {
     private final EmployeeService employeeService = new EmployeeService();
 
     @Test
-    void addEmployee() {
+    void addEmployee_success() {
         //Подготовка входных данных
         String firstName = FIRST_NAME;
         String lastName = LAST_NAME;
@@ -154,7 +154,7 @@ class EmployeeServiceTest {
     }
 
     @Test
-    void removeEmployee() {
+    void removeEmployee_success() {
         //Подготовка входных данных
         String firstName = FIRST_NAME;
         String lastName = LAST_NAME;
@@ -221,7 +221,7 @@ class EmployeeServiceTest {
     }
 
     @Test
-    void findEmployee() {
+    void findEmployee_success() {
         //Подготовка входных данных
         String firstName = FIRST_NAME;
         String lastName = LAST_NAME;

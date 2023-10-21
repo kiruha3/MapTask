@@ -29,7 +29,7 @@ class DepartmentServiceTest {
     private EmployeeGenerator employeeGenerator;
 
     @Test
-    void summSalaryDepartment() {
+    void summSalaryDepartment_success() {
         //Подготовка входных данных
         Integer departmentId = FIRST_DEPARTMENT_ID;
 
