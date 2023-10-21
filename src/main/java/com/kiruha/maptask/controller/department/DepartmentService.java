@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toList;
+
 @Service
 public class DepartmentService implements DepartmentInterface {
     private final EmployeeService employeeService;
@@ -18,8 +21,7 @@ public class DepartmentService implements DepartmentInterface {
 
     @Override
     public Employee minSalary(Integer department) {
-        return employeeService.employees.values()
-                .stream()
+        return employeeService.allEmployee().stream()
                 .filter(employee -> Objects.equals(employee.getDepartment(), department))
                 .min(Comparator.comparingDouble(Employee::getSalary))
                 .orElseThrow(() -> new EmployeeNotFoundExceptionMessage("exception"));
@@ -28,8 +30,7 @@ public class DepartmentService implements DepartmentInterface {
 
     @Override
     public Employee maxSalary(Integer department) {
-        return employeeService.employees.values()
-                .stream()
+        return employeeService.allEmployee().stream()
                 .filter(employee -> Objects.equals(employee.getDepartment(), department))
                 .max(Comparator.comparingDouble(Employee::getSalary))
                 .orElseThrow(() -> new EmployeeNotFoundExceptionMessage("exception"));
@@ -37,11 +38,10 @@ public class DepartmentService implements DepartmentInterface {
     }
 
     @Override
-    public Collection<Employee> allDeparment(Integer department) {
-        return employeeService.employees.values()
-                .stream()
-                .filter(employee -> Objects.equals(employee.getDepartment(), department))
-                .collect(Collectors.toList());
+    public Map<Integer, List<Employee>> allDeparment(Integer department) {
+        return employeeService.allEmployee().stream()
+                .filter(e -> department == null || e.getDepartment() == department)
+                .collect(groupingBy(Employee::getDepartment, toList()));
 
 
     }
@@ -49,9 +49,9 @@ public class DepartmentService implements DepartmentInterface {
 
     @Override
     public Map<Integer, List<Employee>> allDivideDeparment() {
-        return employeeService.employees.values()
+        return employeeService.allEmployee()
                 .stream()
-                .collect(Collectors.groupingBy(Employee::getDepartment));
+                .collect(groupingBy(Employee::getDepartment));
 
     }
 

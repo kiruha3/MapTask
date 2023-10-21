@@ -30,7 +30,7 @@ public class DepartmentController {
     }
 
     @GetMapping(path = "/all", params = {"departmentId"})
-    public Collection<Employee> allDepartment(@RequestParam("departmentId") Integer department) {
+    public Map<Integer, List<Employee>> allDepartment(@RequestParam("departmentId") Integer department) {
         return departmentService.allDeparment(department);
     }
 
