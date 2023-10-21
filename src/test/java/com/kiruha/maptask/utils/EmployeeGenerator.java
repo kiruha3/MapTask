@@ -45,6 +45,9 @@ public class EmployeeGenerator {
     public static List<Employee> getAllEmployee() {
         return Arrays.asList(getEmployee(), getEmployee2(), getEmployee3());
     }
+    String sumDepartmentSalary(Integer department){
+        return String.valueOf(getEmployee().getSalary()+getEmployee2().getSalary());
+    }
     public static Map<Integer,Employee>  getAllEmployee2() {
         return new HashMap<>(Map.of(PASS_NUMM, getEmployee(), PASS_NUMM2, getEmployee2(), PASS_NUMM3, getEmployee3()));
     }

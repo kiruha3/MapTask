@@ -9,6 +9,8 @@ public interface DepartmentInterface {
 
     Employee minSalary(Integer departmentId);
 
+    double sumDepartmentSalary(Integer department);
+
     Employee maxSalary(Integer departmentId);
 
     Map<Integer, List<Employee>> allDeparment(Integer department);

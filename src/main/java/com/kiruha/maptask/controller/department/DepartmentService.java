@@ -6,7 +6,6 @@ import com.kiruha.maptask.selfexception.EmployeeNotFoundExceptionMessage;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
@@ -25,6 +24,13 @@ public class DepartmentService implements DepartmentInterface {
                 .filter(employee -> Objects.equals(employee.getDepartment(), department))
                 .min(Comparator.comparingDouble(Employee::getSalary))
                 .orElseThrow(() -> new EmployeeNotFoundExceptionMessage("exception"));
+
+    }
+    @Override
+    public double sumDepartmentSalary(Integer department) {
+        return employeeService.allEmployee().stream()
+                .filter(employee -> Objects.equals(employee.getDepartment(), department))
+                .mapToInt(i -> i.getSalary().intValue()).sum();
 
     }
 

@@ -1,9 +1,7 @@
 package com.kiruha.maptask.controller;
 
 import com.kiruha.maptask.Employee;
-import com.kiruha.maptask.controller.EmployeeService;
 import com.kiruha.maptask.controller.department.DepartmentService;
-import com.kiruha.maptask.selfexception.EmployeeNotFoundException;
 import com.kiruha.maptask.selfexception.EmployeeNotFoundExceptionMessage;
 import com.kiruha.maptask.utils.EmployeeGenerator;
 import org.junit.jupiter.api.Test;
@@ -31,11 +29,30 @@ class DepartmentServiceTest {
     private EmployeeGenerator employeeGenerator;
 
     @Test
+    void summSalaryDepartment() {
+        //Подготовка входных данных
+        Integer departmentId = FIRST_DEPARTMENT_ID;
+
+        List<Employee> employeeList = Arrays.asList(getEmployee(), getEmployee2(), getEmployee3());
+        //Подготовка ожидаемого результата
+        when(employeeService.allEmployee()).thenReturn(employeeList);
+
+
+        String expectedSumm = String.valueOf(getEmployee().getSalary() + getEmployee2().getSalary() );
+//        String expectedSumm = summSalaryDepartment();//так не получилось!!!!не знаю почему
+        //Начало теста
+        String actualEmployee = String.valueOf(departmentService.sumDepartmentSalary(departmentId));
+        assertEquals(expectedSumm, actualEmployee);
+        assertTrue(getEmployee().getSalary() > getEmployee2().getSalary());
+
+    }
+
+    @Test
     void getEmployeeWithMaxSalary_success() {
         //Подготовка входных данных
         Integer departmentId = FIRST_DEPARTMENT_ID;
 
-        List<Employee> employeeList= Arrays.asList(getEmployee(), getEmployee2(), getEmployee3());
+        List<Employee> employeeList = Arrays.asList(getEmployee(), getEmployee2(), getEmployee3());
         //Подготовка ожидаемого результата
         when(employeeService.allEmployee()).thenReturn(employeeList);
 

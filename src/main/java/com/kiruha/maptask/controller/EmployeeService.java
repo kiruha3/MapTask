@@ -14,13 +14,13 @@ import static org.apache.commons.lang3.StringUtils.isAlpha;
 
 @Service
 public class EmployeeService implements EmployeeInterface {
-    public final Integer maxCountEmployee = 2;
-    public Map<Integer,Employee> employees = new HashMap<>(Map.of( ));
-//    private final EmployeeService employeeService;
-//
-//    public EmployeeServiceImpl(EmployeeService employeeService) {
-//        this.employeeService = employeeService;
-//    }
+    public final Integer maxCountEmployee = 5;
+    public Map<Integer,Employee> employees = new HashMap<>(Map.of(
+            6554,new Employee("Ольга", "Васнецова", 6554, 35000.00, 1),
+            6555, new Employee("Василий", "Синицин",6555,25000.00,1),
+            6556,new Employee("Инга", "Третьякова",6556,15000.00,2),
+            6557,new Employee("Виталя", "Носков",6557,54000.00,2) ));
+
 
     @Override
     public Employee addEmployee(Employee employee, Integer passportNumber) {
